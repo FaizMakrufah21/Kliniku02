@@ -33,6 +33,13 @@ import 'prescription_item.dart' as _i18;
 import 'queue.dart' as _i19;
 import 'specialization.dart' as _i20;
 import 'package:kliniku_server_server/src/generated/appointment.dart' as _i21;
+import 'package:kliniku_server_server/src/generated/doctor.dart' as _i22;
+import 'package:kliniku_server_server/src/generated/medicine.dart' as _i23;
+import 'package:kliniku_server_server/src/generated/patient.dart' as _i24;
+import 'package:kliniku_server_server/src/generated/poli.dart' as _i25;
+import 'package:kliniku_server_server/src/generated/queue.dart' as _i26;
+import 'package:kliniku_server_server/src/generated/specialization.dart'
+    as _i27;
 export 'appointment.dart';
 export 'chat_message.dart';
 export 'chat_room.dart';
@@ -2027,6 +2034,37 @@ class Protocol extends _i1.SerializationManagerServer {
     if (t == List<_i21.Appointment>) {
       return (data as List)
               .map((e) => deserialize<_i21.Appointment>(e))
+              .toList()
+          as T;
+    }
+    if (t == Map<String, int>) {
+      return (data as Map).map(
+            (k, v) => MapEntry(deserialize<String>(k), deserialize<int>(v)),
+          )
+          as T;
+    }
+    if (t == List<_i22.Doctor>) {
+      return (data as List).map((e) => deserialize<_i22.Doctor>(e)).toList()
+          as T;
+    }
+    if (t == List<_i23.Medicine>) {
+      return (data as List).map((e) => deserialize<_i23.Medicine>(e)).toList()
+          as T;
+    }
+    if (t == List<_i24.Patient>) {
+      return (data as List).map((e) => deserialize<_i24.Patient>(e)).toList()
+          as T;
+    }
+    if (t == List<_i25.Poli>) {
+      return (data as List).map((e) => deserialize<_i25.Poli>(e)).toList() as T;
+    }
+    if (t == List<_i26.Queue>) {
+      return (data as List).map((e) => deserialize<_i26.Queue>(e)).toList()
+          as T;
+    }
+    if (t == List<_i27.Specialization>) {
+      return (data as List)
+              .map((e) => deserialize<_i27.Specialization>(e))
               .toList()
           as T;
     }

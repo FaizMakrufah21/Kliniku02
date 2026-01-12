@@ -14,6 +14,7 @@ import 'screens/login_page.dart';
 // production servers.
 var client = Client(
   'http://localhost:8080/',
+  // ignore: deprecated_member_use
   authenticationKeyManager: FlutterAuthenticationKeyManager(),
 )..connectivityMonitor = FlutterConnectivityMonitor();
 

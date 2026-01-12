@@ -27,11 +27,17 @@ import 'prescription_item.dart' as _i14;
 import 'queue.dart' as _i15;
 import 'specialization.dart' as _i16;
 import 'package:kliniku_server_client/src/protocol/appointment.dart' as _i17;
+import 'package:kliniku_server_client/src/protocol/doctor.dart' as _i18;
+import 'package:kliniku_server_client/src/protocol/medicine.dart' as _i19;
+import 'package:kliniku_server_client/src/protocol/patient.dart' as _i20;
+import 'package:kliniku_server_client/src/protocol/poli.dart' as _i21;
+import 'package:kliniku_server_client/src/protocol/queue.dart' as _i22;
+import 'package:kliniku_server_client/src/protocol/specialization.dart' as _i23;
 import 'package:serverpod_auth_idp_client/serverpod_auth_idp_client.dart'
-    as _i18;
-import 'package:serverpod_auth_client/serverpod_auth_client.dart' as _i19;
+    as _i24;
+import 'package:serverpod_auth_client/serverpod_auth_client.dart' as _i25;
 import 'package:serverpod_auth_core_client/serverpod_auth_core_client.dart'
-    as _i20;
+    as _i26;
 export 'appointment.dart';
 export 'chat_message.dart';
 export 'chat_room.dart';
@@ -182,14 +188,45 @@ class Protocol extends _i1.SerializationManager {
               .toList()
           as T;
     }
+    if (t == Map<String, int>) {
+      return (data as Map).map(
+            (k, v) => MapEntry(deserialize<String>(k), deserialize<int>(v)),
+          )
+          as T;
+    }
+    if (t == List<_i18.Doctor>) {
+      return (data as List).map((e) => deserialize<_i18.Doctor>(e)).toList()
+          as T;
+    }
+    if (t == List<_i19.Medicine>) {
+      return (data as List).map((e) => deserialize<_i19.Medicine>(e)).toList()
+          as T;
+    }
+    if (t == List<_i20.Patient>) {
+      return (data as List).map((e) => deserialize<_i20.Patient>(e)).toList()
+          as T;
+    }
+    if (t == List<_i21.Poli>) {
+      return (data as List).map((e) => deserialize<_i21.Poli>(e)).toList() as T;
+    }
+    if (t == List<_i22.Queue>) {
+      return (data as List).map((e) => deserialize<_i22.Queue>(e)).toList()
+          as T;
+    }
+    if (t == List<_i23.Specialization>) {
+      return (data as List)
+              .map((e) => deserialize<_i23.Specialization>(e))
+              .toList()
+          as T;
+    }
     try {
-      return _i18.Protocol().deserialize<T>(data, t);
+      return _i24.Protocol().deserialize<T>(data, t);
     } on _i1.DeserializationTypeNotFoundException catch (_) {}
     try {
-      return _i19.Protocol().deserialize<T>(data, t);
+      return _i25.Protocol().deserialize<T>(data, t);
     } on _i1.DeserializationTypeNotFoundException catch (_) {}
     try {
-      return _i20.Protocol().deserialize<T>(data, t);
+      return _i26.Protocol().deserialize<T>(data, t);
     } on _i1.DeserializationTypeNotFoundException catch (_) {}
     return super.deserialize<T>(data, t);
   }
@@ -259,15 +296,15 @@ class Protocol extends _i1.SerializationManager {
       case _i16.Specialization():
         return 'Specialization';
     }
-    className = _i18.Protocol().getClassNameForObject(data);
+    className = _i24.Protocol().getClassNameForObject(data);
     if (className != null) {
       return 'serverpod_auth_idp.$className';
     }
-    className = _i19.Protocol().getClassNameForObject(data);
+    className = _i25.Protocol().getClassNameForObject(data);
     if (className != null) {
       return 'serverpod_auth.$className';
     }
-    className = _i20.Protocol().getClassNameForObject(data);
+    className = _i26.Protocol().getClassNameForObject(data);
     if (className != null) {
       return 'serverpod_auth_core.$className';
     }
@@ -327,15 +364,15 @@ class Protocol extends _i1.SerializationManager {
     }
     if (dataClassName.startsWith('serverpod_auth_idp.')) {
       data['className'] = dataClassName.substring(19);
-      return _i18.Protocol().deserializeByClassName(data);
+      return _i24.Protocol().deserializeByClassName(data);
     }
     if (dataClassName.startsWith('serverpod_auth.')) {
       data['className'] = dataClassName.substring(15);
-      return _i19.Protocol().deserializeByClassName(data);
+      return _i25.Protocol().deserializeByClassName(data);
     }
     if (dataClassName.startsWith('serverpod_auth_core.')) {
       data['className'] = dataClassName.substring(20);
-      return _i20.Protocol().deserializeByClassName(data);
+      return _i26.Protocol().deserializeByClassName(data);
     }
     return super.deserializeByClassName(data);
   }
@@ -350,13 +387,13 @@ class Protocol extends _i1.SerializationManager {
       return null;
     }
     try {
-      return _i18.Protocol().mapRecordToJson(record);
+      return _i24.Protocol().mapRecordToJson(record);
     } catch (_) {}
     try {
-      return _i19.Protocol().mapRecordToJson(record);
+      return _i25.Protocol().mapRecordToJson(record);
     } catch (_) {}
     try {
-      return _i20.Protocol().mapRecordToJson(record);
+      return _i26.Protocol().mapRecordToJson(record);
     } catch (_) {}
     throw Exception('Unsupported record type ${record.runtimeType}');
   }

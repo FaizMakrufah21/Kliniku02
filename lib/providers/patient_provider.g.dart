@@ -68,8 +68,9 @@ final currentPatientProvider = CurrentPatientProvider._();
 /// Fetches the current patient profile for the logged-in user
 
 final class CurrentPatientProvider
-    extends $FunctionalProvider<AsyncValue<Patient>, Patient, FutureOr<Patient>>
-    with $FutureModifier<Patient>, $FutureProvider<Patient> {
+    extends
+        $FunctionalProvider<AsyncValue<Patient?>, Patient?, FutureOr<Patient?>>
+    with $FutureModifier<Patient?>, $FutureProvider<Patient?> {
   /// Fetches the current patient profile for the logged-in user
   CurrentPatientProvider._()
     : super(
@@ -87,16 +88,16 @@ final class CurrentPatientProvider
 
   @$internal
   @override
-  $FutureProviderElement<Patient> $createElement($ProviderPointer pointer) =>
+  $FutureProviderElement<Patient?> $createElement($ProviderPointer pointer) =>
       $FutureProviderElement(pointer);
 
   @override
-  FutureOr<Patient> create(Ref ref) {
+  FutureOr<Patient?> create(Ref ref) {
     return currentPatient(ref);
   }
 }
 
-String _$currentPatientHash() => r'11650083b9976d25d39e20573c6e9b6fbc17e17f';
+String _$currentPatientHash() => r'004fd2b4e0554bd0213daf73f2e9ffab17b2045b';
 
 /// Fetches a patient by ID
 
@@ -106,8 +107,9 @@ final patientByIdProvider = PatientByIdFamily._();
 /// Fetches a patient by ID
 
 final class PatientByIdProvider
-    extends $FunctionalProvider<AsyncValue<Patient>, Patient, FutureOr<Patient>>
-    with $FutureModifier<Patient>, $FutureProvider<Patient> {
+    extends
+        $FunctionalProvider<AsyncValue<Patient?>, Patient?, FutureOr<Patient?>>
+    with $FutureModifier<Patient?>, $FutureProvider<Patient?> {
   /// Fetches a patient by ID
   PatientByIdProvider._({
     required PatientByIdFamily super.from,
@@ -132,11 +134,11 @@ final class PatientByIdProvider
 
   @$internal
   @override
-  $FutureProviderElement<Patient> $createElement($ProviderPointer pointer) =>
+  $FutureProviderElement<Patient?> $createElement($ProviderPointer pointer) =>
       $FutureProviderElement(pointer);
 
   @override
-  FutureOr<Patient> create(Ref ref) {
+  FutureOr<Patient?> create(Ref ref) {
     final argument = this.argument as int;
     return patientById(ref, argument);
   }
@@ -152,12 +154,12 @@ final class PatientByIdProvider
   }
 }
 
-String _$patientByIdHash() => r'ff6ac9fdba38cfe35121bcbd549a174c8dcb00ce';
+String _$patientByIdHash() => r'4a643ecd4ca10c0dad6c14a47557475df7775b32';
 
 /// Fetches a patient by ID
 
 final class PatientByIdFamily extends $Family
-    with $FunctionalFamilyOverride<FutureOr<Patient>, int> {
+    with $FunctionalFamilyOverride<FutureOr<Patient?>, int> {
   PatientByIdFamily._()
     : super(
         retry: null,

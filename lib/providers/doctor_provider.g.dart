@@ -111,8 +111,8 @@ final doctorByIdProvider = DoctorByIdFamily._();
 /// Fetches a doctor by ID
 
 final class DoctorByIdProvider
-    extends $FunctionalProvider<AsyncValue<Doctor>, Doctor, FutureOr<Doctor>>
-    with $FutureModifier<Doctor>, $FutureProvider<Doctor> {
+    extends $FunctionalProvider<AsyncValue<Doctor?>, Doctor?, FutureOr<Doctor?>>
+    with $FutureModifier<Doctor?>, $FutureProvider<Doctor?> {
   /// Fetches a doctor by ID
   DoctorByIdProvider._({
     required DoctorByIdFamily super.from,
@@ -137,11 +137,11 @@ final class DoctorByIdProvider
 
   @$internal
   @override
-  $FutureProviderElement<Doctor> $createElement($ProviderPointer pointer) =>
+  $FutureProviderElement<Doctor?> $createElement($ProviderPointer pointer) =>
       $FutureProviderElement(pointer);
 
   @override
-  FutureOr<Doctor> create(Ref ref) {
+  FutureOr<Doctor?> create(Ref ref) {
     final argument = this.argument as int;
     return doctorById(ref, argument);
   }
@@ -157,12 +157,12 @@ final class DoctorByIdProvider
   }
 }
 
-String _$doctorByIdHash() => r'3fc91bdf7a82b084e8ffa3d2ef30b1529be64388';
+String _$doctorByIdHash() => r'81b5513b19406581017d39bf7c924a940bb473f1';
 
 /// Fetches a doctor by ID
 
 final class DoctorByIdFamily extends $Family
-    with $FunctionalFamilyOverride<FutureOr<Doctor>, int> {
+    with $FunctionalFamilyOverride<FutureOr<Doctor?>, int> {
   DoctorByIdFamily._()
     : super(
         retry: null,

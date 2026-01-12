@@ -20,24 +20,13 @@ Future<Queue?> currentQueue(Ref ref) async {
 
 /// Fetches a queue by ID
 @riverpod
-Future<Queue> queueById(Ref ref, int id) async {
+Future<Queue?> queueById(Ref ref, int id) async {
   final repository = ref.watch(queueRepositoryProvider);
   return repository.getById(id);
 }
 
-/// Fetches queue by appointment ID
-@riverpod
-Future<Queue?> queueByAppointment(Ref ref, int appointmentId) async {
-  final repository = ref.watch(queueRepositoryProvider);
-  return repository.getByAppointmentId(appointmentId);
-}
-
-/// Fetches all queues for a specific date
-@riverpod
-Future<List<Queue>> queuesByDate(Ref ref, DateTime date) async {
-  final repository = ref.watch(queueRepositoryProvider);
-  return repository.getQueuesByDate(date);
-}
+// queuesByDate removed as repository does not support it
+// use activeQueues instead
 
 /// Fetches queues by poli and date
 @riverpod

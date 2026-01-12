@@ -20,7 +20,7 @@ Future<List<Poli>> poliList(Ref ref) async {
 
 /// Fetches a poli by ID
 @riverpod
-Future<Poli> poliById(Ref ref, int id) async {
+Future<Poli?> poliById(Ref ref, int id) async {
   final repository = ref.watch(poliRepositoryProvider);
   return repository.getById(id);
 }

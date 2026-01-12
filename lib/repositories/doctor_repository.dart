@@ -9,26 +9,18 @@ class DoctorRepository {
   DoctorRepository(this._client);
 
   /// Gets all doctors from the server.
-  /// TODO: Replace with actual endpoint call when server implements doctor endpoints
   Future<List<Doctor>> getAllDoctors() async {
     try {
-      // This will need to be replaced with the actual endpoint call
-      // Example: return await _client.doctor.getAll();
-      throw UnimplementedError(
-        'Doctor.getAll endpoint not yet implemented on server',
-      );
+      return await _client.doctor.getAll();
     } catch (e) {
       throw Exception('Failed to get doctors: $e');
     }
   }
 
   /// Gets a doctor by their ID.
-  Future<Doctor> getById(int id) async {
+  Future<Doctor?> getById(int id) async {
     try {
-      // Example: return await _client.doctor.getById(id: id);
-      throw UnimplementedError(
-        'Doctor.getById endpoint not yet implemented on server',
-      );
+      return await _client.doctor.getById(id);
     } catch (e) {
       throw Exception('Failed to get doctor: $e');
     }
@@ -37,10 +29,7 @@ class DoctorRepository {
   /// Gets all doctors in a specific poli.
   Future<List<Doctor>> getByPoliId(int poliId) async {
     try {
-      // Example: return await _client.doctor.getByPoliId(poliId: poliId);
-      throw UnimplementedError(
-        'Doctor.getByPoliId endpoint not yet implemented on server',
-      );
+      return await _client.doctor.getByPoliId(poliId);
     } catch (e) {
       throw Exception('Failed to get doctors by poli: $e');
     }
@@ -49,10 +38,7 @@ class DoctorRepository {
   /// Gets all doctors with a specific specialization.
   Future<List<Doctor>> getBySpecializationId(int specializationId) async {
     try {
-      // Example: return await _client.doctor.getBySpecializationId(specializationId: specializationId);
-      throw UnimplementedError(
-        'Doctor.getBySpecializationId endpoint not yet implemented on server',
-      );
+      return await _client.doctor.getBySpecializationId(specializationId);
     } catch (e) {
       throw Exception('Failed to get doctors by specialization: $e');
     }
@@ -61,10 +47,7 @@ class DoctorRepository {
   /// Searches doctors by name.
   Future<List<Doctor>> searchByName(String query) async {
     try {
-      // Example: return await _client.doctor.searchByName(query: query);
-      throw UnimplementedError(
-        'Doctor.searchByName endpoint not yet implemented on server',
-      );
+      return await _client.doctor.searchByName(query);
     } catch (e) {
       throw Exception('Failed to search doctors: $e');
     }
@@ -73,10 +56,7 @@ class DoctorRepository {
   /// Gets available doctors (with active status).
   Future<List<Doctor>> getAvailableDoctors() async {
     try {
-      // Example: return await _client.doctor.getAvailable();
-      throw UnimplementedError(
-        'Doctor.getAvailable endpoint not yet implemented on server',
-      );
+      return await _client.doctor.getAvailable();
     } catch (e) {
       throw Exception('Failed to get available doctors: $e');
     }

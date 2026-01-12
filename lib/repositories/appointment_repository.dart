@@ -10,37 +10,53 @@ class AppointmentRepository {
   AppointmentRepository(this._client);
 
   /// Gets appointments for a specific date.
-  /// TODO: Implement when server endpoint is available
   Future<List<Appointment>> getAppointmentsByDate(DateTime date) async {
-    // Placeholder - server endpoint not yet implemented
-    throw UnimplementedError(
-      'Appointment endpoint not implemented on server. '
-      'Create the endpoint in kliniku_server first.',
-    );
+    return await _client.appointment.getAppointmentsByDate(date: date);
   }
 
   /// Gets a single appointment by ID.
-  /// TODO: Implement when server endpoint is available
   Future<Appointment?> getAppointmentById(int id) async {
-    throw UnimplementedError('Appointment endpoint not implemented on server.');
+    return await _client.appointment.getAppointmentDetail(id);
   }
 
   /// Creates a new appointment.
-  /// TODO: Implement when server endpoint is available
   Future<Appointment> createAppointment(Appointment appointment) async {
-    throw UnimplementedError('Appointment endpoint not implemented on server.');
+    // We use bookAppointment endpoint which takes individual parameters
+    // We assume appointment object has these fields populated
+    return await _client.appointment.bookAppointment(
+      doctorId: appointment.doctorId,
+      poliId: appointment.poliId,
+      appointmentDate: appointment.appointmentDate,
+      timeSlot: appointment.timeSlot, // assuming not null for creation
+      type: appointment.type,
+      notes: appointment.notes,
+    );
   }
 
   /// Updates an existing appointment.
-  /// TODO: Implement when server endpoint is available
   Future<Appointment> updateAppointment(Appointment appointment) async {
-    throw UnimplementedError('Appointment endpoint not implemented on server.');
+    // Current endpoint only supports cancellation via cancelAppointment
+    // For full update, we might need a new endpoint method.
+    // implementing cancel if status is cancelled?
+    if (appointment.status == 'cancelled') {
+      final success = await _client.appointment.cancelAppointment(
+        appointment.id!,
+        reason: appointment.cancellationReason ?? 'No reason',
+      );
+      if (success) return appointment;
+    }
+
+    throw UnimplementedError(
+      'Full update not supported yet, only cancellation via specific method',
+    );
   }
 
   /// Deletes an appointment.
-  /// TODO: Implement when server endpoint is available
   Future<bool> deleteAppointment(int id) async {
-    throw UnimplementedError('Appointment endpoint not implemented on server.');
+    // Not exposed in endpoint yet
+    throw UnimplementedError(
+      'Delete appointment not implemented on server yet',
+    );
   }
 
   // Suppress unused field warning - will be used when endpoints are implemented

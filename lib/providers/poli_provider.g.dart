@@ -105,8 +105,8 @@ final poliByIdProvider = PoliByIdFamily._();
 /// Fetches a poli by ID
 
 final class PoliByIdProvider
-    extends $FunctionalProvider<AsyncValue<Poli>, Poli, FutureOr<Poli>>
-    with $FutureModifier<Poli>, $FutureProvider<Poli> {
+    extends $FunctionalProvider<AsyncValue<Poli?>, Poli?, FutureOr<Poli?>>
+    with $FutureModifier<Poli?>, $FutureProvider<Poli?> {
   /// Fetches a poli by ID
   PoliByIdProvider._({
     required PoliByIdFamily super.from,
@@ -131,11 +131,11 @@ final class PoliByIdProvider
 
   @$internal
   @override
-  $FutureProviderElement<Poli> $createElement($ProviderPointer pointer) =>
+  $FutureProviderElement<Poli?> $createElement($ProviderPointer pointer) =>
       $FutureProviderElement(pointer);
 
   @override
-  FutureOr<Poli> create(Ref ref) {
+  FutureOr<Poli?> create(Ref ref) {
     final argument = this.argument as int;
     return poliById(ref, argument);
   }
@@ -151,12 +151,12 @@ final class PoliByIdProvider
   }
 }
 
-String _$poliByIdHash() => r'7456a3af02486b23ff992d58ce35896e96aea97e';
+String _$poliByIdHash() => r'8bcd59770a57916089fed817f913efe641b04ec7';
 
 /// Fetches a poli by ID
 
 final class PoliByIdFamily extends $Family
-    with $FunctionalFamilyOverride<FutureOr<Poli>, int> {
+    with $FunctionalFamilyOverride<FutureOr<Poli?>, int> {
   PoliByIdFamily._()
     : super(
         retry: null,

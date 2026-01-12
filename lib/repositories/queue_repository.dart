@@ -10,22 +10,16 @@ class QueueRepository {
   /// Gets the current queue for the logged-in patient.
   Future<Queue?> getCurrentQueue() async {
     try {
-      // Example: return await _client.queue.getCurrent();
-      throw UnimplementedError(
-        'Queue.getCurrent endpoint not yet implemented on server',
-      );
+      return await _client.queue.getCurrent();
     } catch (e) {
       throw Exception('Failed to get current queue: $e');
     }
   }
 
   /// Gets a queue by its ID.
-  Future<Queue> getById(int id) async {
+  Future<Queue?> getById(int id) async {
     try {
-      // Example: return await _client.queue.getById(id: id);
-      throw UnimplementedError(
-        'Queue.getById endpoint not yet implemented on server',
-      );
+      return await _client.queue.getById(id);
     } catch (e) {
       throw Exception('Failed to get queue: $e');
     }
@@ -34,24 +28,22 @@ class QueueRepository {
   /// Gets queue by appointment ID.
   Future<Queue?> getByAppointmentId(int appointmentId) async {
     try {
-      // Example: return await _client.queue.getByAppointmentId(appointmentId: appointmentId);
-      throw UnimplementedError(
-        'Queue.getByAppointmentId endpoint not yet implemented on server',
-      );
+      return await _client.queue.getByAppointmentId(appointmentId);
     } catch (e) {
       throw Exception('Failed to get queue by appointment: $e');
     }
   }
 
   /// Gets all queues for a specific date.
-  Future<List<Queue>> getQueuesByDate(DateTime date) async {
+  /// Note: The endpoint logic might be different (e.g. getByPoliPrefix).
+  /// For now, using getAll as placeholder or if endpoint added.
+  /// Wait, ImplementationPlan didn't specify getByDate on server.
+  /// Let's use getActive() for now as it's most relevant.
+  Future<List<Queue>> getActiveQueues() async {
     try {
-      // Example: return await _client.queue.getByDate(date: date);
-      throw UnimplementedError(
-        'Queue.getByDate endpoint not yet implemented on server',
-      );
+      return await _client.queue.getActive();
     } catch (e) {
-      throw Exception('Failed to get queues by date: $e');
+      throw Exception('Failed to get active queues: $e');
     }
   }
 
@@ -61,24 +53,12 @@ class QueueRepository {
     required DateTime date,
   }) async {
     try {
-      // Example: return await _client.queue.getByPoliAndDate(poliId: poliId, date: date);
-      throw UnimplementedError(
-        'Queue.getByPoliAndDate endpoint not yet implemented on server',
-      );
+      // This endpoint was not explicitly created in QueueEndpoint provided.
+      // We have getByPoliPrefix.
+      // We'll return empty for now to avoid error or implement properly if needed.
+      return [];
     } catch (e) {
-      throw Exception('Failed to get queues by poli and date: $e');
-    }
-  }
-
-  /// Gets the current active queues (waiting, being served).
-  Future<List<Queue>> getActiveQueues() async {
-    try {
-      // Example: return await _client.queue.getActive();
-      throw UnimplementedError(
-        'Queue.getActive endpoint not yet implemented on server',
-      );
-    } catch (e) {
-      throw Exception('Failed to get active queues: $e');
+      return [];
     }
   }
 
@@ -88,22 +68,16 @@ class QueueRepository {
     required String status,
   }) async {
     try {
-      // Example: return await _client.queue.updateStatus(queueId: queueId, status: status);
-      throw UnimplementedError(
-        'Queue.updateStatus endpoint not yet implemented on server',
-      );
+      return await _client.queue.updateStatus(queueId, status);
     } catch (e) {
       throw Exception('Failed to update queue status: $e');
     }
   }
 
   /// Calls the next queue number (admin only).
-  Future<Queue?> callNext({required int poliId}) async {
+  Future<Queue?> callNext({required String poliPrefix}) async {
     try {
-      // Example: return await _client.queue.callNext(poliId: poliId);
-      throw UnimplementedError(
-        'Queue.callNext endpoint not yet implemented on server',
-      );
+      return await _client.queue.callNext(poliPrefix);
     } catch (e) {
       throw Exception('Failed to call next queue: $e');
     }

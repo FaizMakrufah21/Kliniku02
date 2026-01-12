@@ -13,14 +13,14 @@ PatientRepository patientRepository(Ref ref) {
 
 /// Fetches the current patient profile for the logged-in user
 @riverpod
-Future<Patient> currentPatient(Ref ref) async {
+Future<Patient?> currentPatient(Ref ref) async {
   final repository = ref.watch(patientRepositoryProvider);
   return repository.getCurrentPatient();
 }
 
 /// Fetches a patient by ID
 @riverpod
-Future<Patient> patientById(Ref ref, int id) async {
+Future<Patient?> patientById(Ref ref, int id) async {
   final repository = ref.watch(patientRepositoryProvider);
   return repository.getById(id);
 }

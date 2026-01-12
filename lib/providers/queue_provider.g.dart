@@ -101,8 +101,8 @@ final queueByIdProvider = QueueByIdFamily._();
 /// Fetches a queue by ID
 
 final class QueueByIdProvider
-    extends $FunctionalProvider<AsyncValue<Queue>, Queue, FutureOr<Queue>>
-    with $FutureModifier<Queue>, $FutureProvider<Queue> {
+    extends $FunctionalProvider<AsyncValue<Queue?>, Queue?, FutureOr<Queue?>>
+    with $FutureModifier<Queue?>, $FutureProvider<Queue?> {
   /// Fetches a queue by ID
   QueueByIdProvider._({
     required QueueByIdFamily super.from,
@@ -127,11 +127,11 @@ final class QueueByIdProvider
 
   @$internal
   @override
-  $FutureProviderElement<Queue> $createElement($ProviderPointer pointer) =>
+  $FutureProviderElement<Queue?> $createElement($ProviderPointer pointer) =>
       $FutureProviderElement(pointer);
 
   @override
-  FutureOr<Queue> create(Ref ref) {
+  FutureOr<Queue?> create(Ref ref) {
     final argument = this.argument as int;
     return queueById(ref, argument);
   }
@@ -147,12 +147,12 @@ final class QueueByIdProvider
   }
 }
 
-String _$queueByIdHash() => r'6e5c14f5d0691644d7f27f4eb34e8f59e780957a';
+String _$queueByIdHash() => r'51067dc2be68f3a836fb296c647054aa2b512998';
 
 /// Fetches a queue by ID
 
 final class QueueByIdFamily extends $Family
-    with $FunctionalFamilyOverride<FutureOr<Queue>, int> {
+    with $FunctionalFamilyOverride<FutureOr<Queue?>, int> {
   QueueByIdFamily._()
     : super(
         retry: null,
@@ -169,169 +169,6 @@ final class QueueByIdFamily extends $Family
 
   @override
   String toString() => r'queueByIdProvider';
-}
-
-/// Fetches queue by appointment ID
-
-@ProviderFor(queueByAppointment)
-final queueByAppointmentProvider = QueueByAppointmentFamily._();
-
-/// Fetches queue by appointment ID
-
-final class QueueByAppointmentProvider
-    extends $FunctionalProvider<AsyncValue<Queue?>, Queue?, FutureOr<Queue?>>
-    with $FutureModifier<Queue?>, $FutureProvider<Queue?> {
-  /// Fetches queue by appointment ID
-  QueueByAppointmentProvider._({
-    required QueueByAppointmentFamily super.from,
-    required int super.argument,
-  }) : super(
-         retry: null,
-         name: r'queueByAppointmentProvider',
-         isAutoDispose: true,
-         dependencies: null,
-         $allTransitiveDependencies: null,
-       );
-
-  @override
-  String debugGetCreateSourceHash() => _$queueByAppointmentHash();
-
-  @override
-  String toString() {
-    return r'queueByAppointmentProvider'
-        ''
-        '($argument)';
-  }
-
-  @$internal
-  @override
-  $FutureProviderElement<Queue?> $createElement($ProviderPointer pointer) =>
-      $FutureProviderElement(pointer);
-
-  @override
-  FutureOr<Queue?> create(Ref ref) {
-    final argument = this.argument as int;
-    return queueByAppointment(ref, argument);
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return other is QueueByAppointmentProvider && other.argument == argument;
-  }
-
-  @override
-  int get hashCode {
-    return argument.hashCode;
-  }
-}
-
-String _$queueByAppointmentHash() =>
-    r'34554196ac86e17f30d766236521dfe34e02bef1';
-
-/// Fetches queue by appointment ID
-
-final class QueueByAppointmentFamily extends $Family
-    with $FunctionalFamilyOverride<FutureOr<Queue?>, int> {
-  QueueByAppointmentFamily._()
-    : super(
-        retry: null,
-        name: r'queueByAppointmentProvider',
-        dependencies: null,
-        $allTransitiveDependencies: null,
-        isAutoDispose: true,
-      );
-
-  /// Fetches queue by appointment ID
-
-  QueueByAppointmentProvider call(int appointmentId) =>
-      QueueByAppointmentProvider._(argument: appointmentId, from: this);
-
-  @override
-  String toString() => r'queueByAppointmentProvider';
-}
-
-/// Fetches all queues for a specific date
-
-@ProviderFor(queuesByDate)
-final queuesByDateProvider = QueuesByDateFamily._();
-
-/// Fetches all queues for a specific date
-
-final class QueuesByDateProvider
-    extends
-        $FunctionalProvider<
-          AsyncValue<List<Queue>>,
-          List<Queue>,
-          FutureOr<List<Queue>>
-        >
-    with $FutureModifier<List<Queue>>, $FutureProvider<List<Queue>> {
-  /// Fetches all queues for a specific date
-  QueuesByDateProvider._({
-    required QueuesByDateFamily super.from,
-    required DateTime super.argument,
-  }) : super(
-         retry: null,
-         name: r'queuesByDateProvider',
-         isAutoDispose: true,
-         dependencies: null,
-         $allTransitiveDependencies: null,
-       );
-
-  @override
-  String debugGetCreateSourceHash() => _$queuesByDateHash();
-
-  @override
-  String toString() {
-    return r'queuesByDateProvider'
-        ''
-        '($argument)';
-  }
-
-  @$internal
-  @override
-  $FutureProviderElement<List<Queue>> $createElement(
-    $ProviderPointer pointer,
-  ) => $FutureProviderElement(pointer);
-
-  @override
-  FutureOr<List<Queue>> create(Ref ref) {
-    final argument = this.argument as DateTime;
-    return queuesByDate(ref, argument);
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return other is QueuesByDateProvider && other.argument == argument;
-  }
-
-  @override
-  int get hashCode {
-    return argument.hashCode;
-  }
-}
-
-String _$queuesByDateHash() => r'8fec4e53cdf7a87771c1d311b182b8342a2445a5';
-
-/// Fetches all queues for a specific date
-
-final class QueuesByDateFamily extends $Family
-    with $FunctionalFamilyOverride<FutureOr<List<Queue>>, DateTime> {
-  QueuesByDateFamily._()
-    : super(
-        retry: null,
-        name: r'queuesByDateProvider',
-        dependencies: null,
-        $allTransitiveDependencies: null,
-        isAutoDispose: true,
-      );
-
-  /// Fetches all queues for a specific date
-
-  QueuesByDateProvider call(DateTime date) =>
-      QueuesByDateProvider._(argument: date, from: this);
-
-  @override
-  String toString() => r'queuesByDateProvider';
 }
 
 /// Fetches queues by poli and date

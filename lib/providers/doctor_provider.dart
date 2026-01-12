@@ -20,7 +20,7 @@ Future<List<Doctor>> doctorList(Ref ref) async {
 
 /// Fetches a doctor by ID
 @riverpod
-Future<Doctor> doctorById(Ref ref, int id) async {
+Future<Doctor?> doctorById(Ref ref, int id) async {
   final repository = ref.watch(doctorRepositoryProvider);
   return repository.getById(id);
 }

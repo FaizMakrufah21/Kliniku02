@@ -16,9 +16,88 @@ appointment:
   - cancelAppointment:
   - getAppointmentDetail:
   - getAppointmentsByDate:
+dataSeed:
+  - seedAll:
+  - seedPolis:
+  - seedSpecializations:
+  - seedDoctors:
+  - seedMedicines:
+doctor:
+  - getAll:
+  - getById:
+  - getByPoliId:
+  - getBySpecializationId:
+  - searchByName:
+  - getAvailable:
+  - getAvailableByPoliId:
+  - create:
+  - update:
+  - updateStatus:
+  - delete:
+  - deactivate:
+medicine:
+  - getAll:
+  - getById:
+  - getByCode:
+  - searchByName:
+  - getByCategory:
+  - getActive:
+  - getPrescriptionRequired:
+  - getOverTheCounter:
+  - create:
+  - update:
+  - updatePrice:
+  - delete:
+  - deactivate:
+  - activate:
+patient:
+  - getCurrent:
+  - getAll:
+  - getById:
+  - getByUserId:
+  - searchByName:
+  - searchByNik:
+  - getActive:
+  - create:
+  - createForCurrentUser:
+  - update:
+  - updateCurrent:
+  - delete:
+  - deactivate:
+poli:
+  - getAll:
+  - getById:
+  - getActive:
+  - searchByName:
+  - create:
+  - update:
+  - delete:
+  - deactivate:
+queue:
+  - getCurrent:
+  - getAll:
+  - getById:
+  - getByAppointmentId:
+  - getActive:
+  - getByPoliPrefix:
+  - getActiveByPoliPrefix:
+  - create:
+  - createForAppointment:
+  - update:
+  - updateStatus:
+  - callNext:
+  - delete:
+  - skip:
 simpleAuth:
   - register:
   - login:
   - seedAdminAccounts:
+specialization:
+  - getAll:
+  - getById:
+  - searchByName:
+  - create:
+  - update:
+  - delete:
 greeting:
   - hello:
