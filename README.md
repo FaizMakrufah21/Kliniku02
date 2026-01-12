@@ -1,4 +1,4 @@
-# kliniku_admin
+# Kliniku02
 
 A new Flutter project.
 
