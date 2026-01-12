@@ -1,0 +1,23 @@
+class: MedicalRecord
+table: medical_records
+fields:
+  appointmentId: int, relation(parent=appointments)
+  patientId: int, relation(parent=patients)
+  doctorId: int, relation(parent=doctors)
+  recordDate: DateTime
+  chiefComplaint: String  # Keluhan utama
+  presentIllness: String?  # Riwayat penyakit sekarang
+  physicalExamination: String?
+  vitalSigns: String?  # JSON: {"bloodPressure": "120/80", "temperature": 36.5}
+  diagnosis: String
+  icdCode: String?  # ICD-10 code
+  treatmentPlan: String?
+  notes: String?
+  createdAt: DateTime
+  updatedAt: DateTime
+indexes:
+  record_patient_idx:
+    fields: patientId
+  record_appointment_idx:
+    fields: appointmentId
+    unique: true

@@ -1,0 +1,44 @@
+services:
+  # Development services
+  postgres:
+    image: pgvector/pgvector:pg16
+    ports:
+      - "${DB_PORT:-8090}:5432"
+    environment:
+      POSTGRES_USER: ${DB_USER:-postgres}
+      POSTGRES_DB: ${DB_NAME:-kliniku_server}
+      POSTGRES_PASSWORD: "${DB_PASSWORD:-RNtBjKmBidoo8__dblmV0si58TN3JiTr}"
+    volumes:
+      - kliniku_server_data:/var/lib/postgresql/data
+
+  redis:
+    image: redis:6.2.6
+    ports:
+      - "${REDIS_PORT:-8091}:6379"
+    command: redis-server --requirepass "${REDIS_PASSWORD:-OZiSloJkfebj9-yBPJBYb7NcR-jc1b0x}"
+    environment:
+      - REDIS_REPLICATION_MODE=master
+
+  # Test services
+  postgres_test:
+    image: pgvector/pgvector:pg16
+    ports:
+      - "${TEST_DB_PORT:-9090}:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_DB: kliniku_server_test
+      POSTGRES_PASSWORD: "${TEST_DB_PASSWORD:-VCTEO7Db9GjH3ZT3A9kZI8_mORHMry_u}"
+    volumes:
+      - kliniku_server_test_data:/var/lib/postgresql/data
+
+  redis_test:
+    image: redis:6.2.6
+    ports:
+      - "${TEST_REDIS_PORT:-9091}:6379"
+    command: redis-server --requirepass "${TEST_REDIS_PASSWORD:-EVI_I9JiothjZkhogFol_LewHcXGPWtn}"
+    environment:
+      - REDIS_REPLICATION_MODE=master
+
+volumes:
+  kliniku_server_data:
+  kliniku_server_test_data:

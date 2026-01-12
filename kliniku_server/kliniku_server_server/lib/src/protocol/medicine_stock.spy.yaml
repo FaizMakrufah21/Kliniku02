@@ -1,0 +1,16 @@
+class: MedicineStock
+table: medicine_stocks
+fields:
+  medicineId: int, relation(parent=medicines)
+  batchNumber: String
+  quantity: int
+  expiryDate: DateTime
+  purchaseDate: DateTime
+  purchasePrice: double
+  createdAt: DateTime
+  updatedAt: DateTime
+indexes:
+  stock_medicine_idx:
+    fields: medicineId
+  stock_expiry_idx:
+    fields: expiryDate

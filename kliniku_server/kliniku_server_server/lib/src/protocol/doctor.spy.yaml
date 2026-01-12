@@ -1,0 +1,26 @@
+class: Doctor
+table: doctors
+fields:
+  employeeId: String
+  name: String
+  specializationId: int, relation(parent=specializations)
+  poliId: int, relation(parent=polis)
+  phone: String
+  licenseNumber: String  # STR (Surat Tanda Registrasi)
+  experienceYears: int
+  consultationFee: double
+  teleconsultFee: double
+  bio: String?
+  profileImageUrl: String?
+  rating: double?
+  totalReviews: int?
+  status: String  # 'active', 'on_leave', 'inactive'
+  createdAt: DateTime
+  updatedAt: DateTime
+indexes:
+  doctor_employee_id_idx:
+    fields: employeeId
+    unique: true
+  doctor_license_idx:
+    fields: licenseNumber
+    unique: true

@@ -1,0 +1,14 @@
+class: Poli
+table: polis
+fields:
+  name: String
+  description: String?
+  iconName: String?
+  colorHex: String?
+  isActive: bool
+  createdAt: DateTime
+  updatedAt: DateTime
+indexes:
+  poli_name_idx:
+    fields: name
+    unique: true

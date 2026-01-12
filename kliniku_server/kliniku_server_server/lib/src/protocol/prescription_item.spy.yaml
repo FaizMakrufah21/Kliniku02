@@ -1,0 +1,15 @@
+class: PrescriptionItem
+table: prescription_items
+fields:
+  prescriptionId: int, relation(parent=prescriptions)
+  medicineId: int, relation(parent=medicines)
+  quantity: int
+  dosage: String  # "3x1 sehari"
+  frequency: String  # "Setelah makan"
+  duration: String  # "7 hari"
+  instructions: String?
+  unitPrice: double
+  subtotal: double
+indexes:
+  prescription_item_prescription_idx:
+    fields: prescriptionId

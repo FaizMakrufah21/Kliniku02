@@ -1,0 +1,24 @@
+emailIdp:
+  - login:
+  - startRegistration:
+  - verifyRegistrationCode:
+  - finishRegistration:
+  - startPasswordReset:
+  - verifyPasswordResetCode:
+  - finishPasswordReset:
+jwtRefresh:
+  - refreshAccessToken:
+adminSeed:
+  - seedAdminAccounts:
+appointment:
+  - checkSlotAvailability:
+  - bookAppointment:
+  - cancelAppointment:
+  - getAppointmentDetail:
+  - getAppointmentsByDate:
+simpleAuth:
+  - register:
+  - login:
+  - seedAdminAccounts:
+greeting:
+  - hello:

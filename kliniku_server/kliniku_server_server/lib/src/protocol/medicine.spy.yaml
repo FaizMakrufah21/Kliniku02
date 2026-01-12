@@ -1,0 +1,23 @@
+class: Medicine
+table: medicines
+fields:
+  code: String
+  name: String
+  genericName: String?
+  category: String  # 'tablet', 'syrup', 'injection', 'cream', etc.
+  unit: String  # 'tablet', 'ml', 'mg'
+  manufacturer: String?
+  price: double
+  requiresPrescription: bool
+  description: String?
+  sideEffects: String?
+  contraindications: String?
+  isActive: bool
+  createdAt: DateTime
+  updatedAt: DateTime
+indexes:
+  medicine_code_idx:
+    fields: code
+    unique: true
+  medicine_name_idx:
+    fields: name

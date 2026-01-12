@@ -1,16 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../providers/auth_provider.dart';
 import 'customer/main_layout.dart';
 import 'admin/main_layout.dart';
+import 'sign_up_page.dart';
+import 'forgot_password_page.dart';
 
-class LoginPage extends StatefulWidget {
+class LoginPage extends ConsumerStatefulWidget {
   const LoginPage({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  ConsumerState<LoginPage> createState() => _LoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _LoginPageState extends ConsumerState<LoginPage> {
   bool _isAdmin = false;
   bool _obscurePassword = true;
   final TextEditingController _emailController = TextEditingController();
@@ -22,22 +26,69 @@ class _LoginPageState extends State<LoginPage> {
 
   Color get _currentPrimary => _isAdmin ? _adminPrimary : _patientPrimary;
 
-  void _login() {
-    // Navigate based on role
-    if (_isAdmin) {
-      Navigator.of(
-        context,
-      ).pushReplacement(MaterialPageRoute(builder: (_) => const MainLayout()));
-    } else {
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (_) => const CustomerMainLayout()),
-      );
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+
+  Future<void> _login() async {
+    final email = _emailController.text.trim();
+    final password = _passwordController.text;
+
+    if (email.isEmpty || password.isEmpty) {
+      _showError('Masukkan email dan kata sandi');
+      return;
     }
+
+    final authNotifier = ref.read(authStateProvider.notifier);
+    final success = await authNotifier.signIn(email: email, password: password);
+
+    if (success && mounted) {
+      // Navigate based on role
+      if (_isAdmin) {
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (_) => const MainLayout()),
+        );
+      } else {
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (_) => const CustomerMainLayout()),
+        );
+      }
+    }
+  }
+
+  void _showError(String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(message), backgroundColor: Colors.red[700]),
+    );
+  }
+
+  void _navigateToSignUp() {
+    Navigator.of(
+      context,
+    ).push(MaterialPageRoute(builder: (_) => const SignUpPage()));
+  }
+
+  void _navigateToForgotPassword() {
+    Navigator.of(
+      context,
+    ).push(MaterialPageRoute(builder: (_) => const ForgotPasswordPage()));
   }
 
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
+    final authState = ref.watch(authStateProvider);
+
+    // Show error if any
+    ref.listen<AuthState>(authStateProvider, (previous, next) {
+      if (next.errorMessage != null &&
+          previous?.errorMessage != next.errorMessage) {
+        _showError(next.errorMessage!);
+      }
+    });
 
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
@@ -149,7 +200,7 @@ class _LoginPageState extends State<LoginPage> {
                     child: Padding(
                       padding: const EdgeInsets.only(top: 12),
                       child: TextButton(
-                        onPressed: () {},
+                        onPressed: _navigateToForgotPassword,
                         style: TextButton.styleFrom(
                           padding: EdgeInsets.zero,
                           minimumSize: Size.zero,
@@ -174,7 +225,7 @@ class _LoginPageState extends State<LoginPage> {
                     width: double.infinity,
                     height: 52,
                     child: ElevatedButton(
-                      onPressed: _login,
+                      onPressed: authState.isLoading ? null : _login,
                       style: ElevatedButton.styleFrom(
                         backgroundColor: _currentPrimary,
                         foregroundColor: Colors.white,
@@ -184,14 +235,23 @@ class _LoginPageState extends State<LoginPage> {
                           borderRadius: BorderRadius.circular(12),
                         ),
                       ),
-                      child: const Text(
-                        'MASUK',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 15,
-                          letterSpacing: 0.5,
-                        ),
-                      ),
+                      child: authState.isLoading
+                          ? const SizedBox(
+                              width: 24,
+                              height: 24,
+                              child: CircularProgressIndicator(
+                                color: Colors.white,
+                                strokeWidth: 2,
+                              ),
+                            )
+                          : const Text(
+                              'MASUK',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 15,
+                                letterSpacing: 0.5,
+                              ),
+                            ),
                     ),
                   ),
 
@@ -206,7 +266,7 @@ class _LoginPageState extends State<LoginPage> {
                           style: Theme.of(context).textTheme.bodySmall,
                         ),
                         TextButton(
-                          onPressed: () {},
+                          onPressed: _navigateToSignUp,
                           child: Text(
                             'DAFTAR SEKARANG',
                             style: TextStyle(
@@ -325,9 +385,6 @@ class _LoginPageState extends State<LoginPage> {
             horizontal: 16,
             vertical: 14,
           ),
-          // We handle focusing styling visually via the Container if needed,
-          // but Material TextField focus works too.
-          // For exact emulation we'd wrap in Focus widget, but default is fine for now.
         ),
       ),
     );

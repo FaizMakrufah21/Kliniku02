@@ -1,0 +1,16 @@
+class: ChatRoom
+table: chat_rooms
+fields:
+  patientId: int, relation(parent=patients)
+  doctorId: int, relation(parent=doctors)
+  appointmentId: int?, relation(parent=appointments)
+  type: String  # 'teleconsult', 'follow_up'
+  status: String  # 'active', 'closed'
+  startedAt: DateTime
+  endedAt: DateTime?
+  createdAt: DateTime
+indexes:
+  chatroom_patient_idx:
+    fields: patientId
+  chatroom_doctor_idx:
+    fields: doctorId

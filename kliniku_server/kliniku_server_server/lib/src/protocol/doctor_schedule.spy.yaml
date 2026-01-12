@@ -1,0 +1,13 @@
+class: DoctorSchedule
+table: doctor_schedules
+fields:
+  doctorId: int, relation(parent=doctors)
+  dayOfWeek: int  # 1=Monday, 7=Sunday
+  startTime: String  # "08:00"
+  endTime: String    # "12:00"
+  slotDurationMinutes: int  # 15, 30, 60
+  maxPatients: int
+  isActive: bool
+indexes:
+  schedule_doctor_day_idx:
+    fields: doctorId, dayOfWeek

@@ -1,0 +1,10 @@
+class: Specialization
+table: specializations
+fields:
+  name: String
+  description: String?
+  iconName: String?
+indexes:
+  specialization_name_idx:
+    fields: name
+    unique: true

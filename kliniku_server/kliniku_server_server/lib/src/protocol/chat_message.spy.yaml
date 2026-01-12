@@ -1,0 +1,16 @@
+class: ChatMessage
+table: chat_messages
+fields:
+  chatRoomId: int, relation(parent=chat_rooms)
+  senderId: int  # userId (for customer) or 0 for admin actions
+  senderType: String  # 'customer' or 'admin'
+  messageType: String  # 'text', 'image', 'file', 'prescription'
+  content: String
+  attachmentUrl: String?
+  isRead: bool
+  sentAt: DateTime
+indexes:
+  message_room_idx:
+    fields: chatRoomId
+  message_sent_idx:
+    fields: sentAt

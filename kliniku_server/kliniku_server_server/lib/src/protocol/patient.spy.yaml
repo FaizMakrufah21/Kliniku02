@@ -1,0 +1,23 @@
+class: Patient
+table: patients
+fields:
+  userId: int
+  nik: String
+  name: String
+  dateOfBirth: DateTime
+  gender: String  # 'male', 'female'
+  phone: String
+  address: String?
+  bloodType: String?
+  allergies: String?
+  emergencyContact: String?
+  status: String  # 'active', 'inactive'
+  createdAt: DateTime
+  updatedAt: DateTime
+indexes:
+  patient_nik_idx:
+    fields: nik
+    unique: true
+  patient_user_idx:
+    fields: userId
+    unique: true

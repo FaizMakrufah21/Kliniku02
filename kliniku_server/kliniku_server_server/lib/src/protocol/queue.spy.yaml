@@ -1,0 +1,18 @@
+class: Queue
+table: queues
+fields:
+  appointmentId: int, relation(parent=appointments)
+  queueNumber: String  # "A001", "B023"
+  queuePrefix: String  # "A" for Poli Umum, "B" for Poli Gigi
+  queueSequence: int   # 1, 2, 3...
+  status: String  # 'waiting', 'called', 'serving', 'done', 'skipped'
+  calledAt: DateTime?
+  servedAt: DateTime?
+  completedAt: DateTime?
+  estimatedWaitMinutes: int?
+indexes:
+  queue_appointment_idx:
+    fields: appointmentId
+    unique: true
+  queue_date_poli_idx:
+    fields: queuePrefix, queueSequence

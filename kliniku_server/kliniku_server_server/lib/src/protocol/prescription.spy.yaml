@@ -1,0 +1,20 @@
+class: Prescription
+table: prescriptions
+fields:
+  medicalRecordId: int, relation(parent=medical_records)
+  patientId: int, relation(parent=patients)
+  doctorId: int, relation(parent=doctors)
+  prescriptionNumber: String  # "RX-20260112-001"
+  prescriptionDate: DateTime
+  status: String  # 'pending', 'dispensed', 'partial', 'cancelled'
+  totalAmount: double
+  paymentStatus: String  # 'unpaid', 'paid'
+  notes: String?
+  createdAt: DateTime
+  updatedAt: DateTime
+indexes:
+  prescription_number_idx:
+    fields: prescriptionNumber
+    unique: true
+  prescription_patient_idx:
+    fields: patientId
