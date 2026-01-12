@@ -120,11 +120,21 @@ class _ScheduleScreenState extends State<ScheduleScreen>
   }
 
   Widget _buildHeader() {
+    // Check if we are on a desktop screen (width >= 768)
+    final isDesktop = MediaQuery.of(context).size.width >= 768;
+
     return Container(
       padding: const EdgeInsets.fromLTRB(20, 20, 20, 16),
-      child: const Row(
+      child: Row(
         children: [
-          Expanded(
+          if (!isDesktop) ...[
+            IconButton(
+              icon: const Icon(Icons.menu, color: _primaryColor),
+              onPressed: () => Scaffold.of(context).openDrawer(),
+            ),
+            const SizedBox(width: 8),
+          ],
+          const Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -140,7 +150,7 @@ class _ScheduleScreenState extends State<ScheduleScreen>
               ],
             ),
           ),
-          Icon(Icons.calendar_month, size: 32, color: _primaryColor),
+          const Icon(Icons.calendar_month, size: 32, color: _primaryColor),
         ],
       ),
     );

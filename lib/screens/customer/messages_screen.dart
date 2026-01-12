@@ -63,22 +63,36 @@ class _MessagesScreenState extends State<MessagesScreen> {
   }
 
   Widget _buildHeader() {
+    // Check if we are on a desktop screen (width >= 768)
+    final isDesktop = MediaQuery.of(context).size.width >= 768;
+
     return Container(
       padding: const EdgeInsets.fromLTRB(20, 20, 20, 8),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+          Row(
             children: [
-              Text(
-                'Pesan',
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-              ),
-              SizedBox(height: 4),
-              Text(
-                'Chat dengan dokter Anda',
-                style: TextStyle(fontSize: 14, color: Color(0xFF5A7E8C)),
+              if (!isDesktop) ...[
+                IconButton(
+                  icon: const Icon(Icons.menu, color: _primaryColor),
+                  onPressed: () => Scaffold.of(context).openDrawer(),
+                ),
+                const SizedBox(width: 8),
+              ],
+              const Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Pesan',
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                  ),
+                  SizedBox(height: 4),
+                  Text(
+                    'Chat dengan dokter Anda',
+                    style: TextStyle(fontSize: 14, color: Color(0xFF5A7E8C)),
+                  ),
+                ],
               ),
             ],
           ),

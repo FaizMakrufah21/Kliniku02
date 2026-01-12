@@ -15,7 +15,7 @@ class ProfileScreen extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              _buildProfileHeader(),
+              _buildProfileHeader(context),
               const SizedBox(height: 24),
               _buildMenuSection(context),
               const SizedBox(height: 24),
@@ -28,11 +28,25 @@ class ProfileScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildProfileHeader() {
+  Widget _buildProfileHeader(BuildContext context) {
+    // Check if we are on a desktop screen (width >= 768)
+    final isDesktop = MediaQuery.of(context).size.width >= 768;
+
     return Container(
       padding: const EdgeInsets.all(24),
       child: Column(
         children: [
+          if (!isDesktop)
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Padding(
+                padding: const EdgeInsets.only(bottom: 16),
+                child: IconButton(
+                  icon: const Icon(Icons.menu, color: _primaryColor),
+                  onPressed: () => Scaffold.of(context).openDrawer(),
+                ),
+              ),
+            ),
           Container(
             width: 100,
             height: 100,

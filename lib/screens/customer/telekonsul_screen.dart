@@ -15,7 +15,7 @@ class TelekonsulScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _buildHeader(),
+              _buildHeader(context),
               _buildBanner(),
               _buildCategorySection(),
               _buildDoctorList(),
@@ -26,23 +26,37 @@ class TelekonsulScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildHeader() {
+  Widget _buildHeader(BuildContext context) {
+    // Check if we are on a desktop screen (width >= 768)
+    final isDesktop = MediaQuery.of(context).size.width >= 768;
+
     return Container(
       padding: const EdgeInsets.all(20),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+          Row(
             children: [
-              Text(
-                'Telekonsultasi',
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-              ),
-              SizedBox(height: 4),
-              Text(
-                'Konsultasi dokter dari rumah',
-                style: TextStyle(fontSize: 14, color: Color(0xFF5A7E8C)),
+              if (!isDesktop) ...[
+                IconButton(
+                  icon: const Icon(Icons.menu, color: _primaryColor),
+                  onPressed: () => Scaffold.of(context).openDrawer(),
+                ),
+                const SizedBox(width: 8),
+              ],
+              const Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Telekonsultasi',
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                  ),
+                  SizedBox(height: 4),
+                  Text(
+                    'Konsultasi dokter dari rumah',
+                    style: TextStyle(fontSize: 14, color: Color(0xFF5A7E8C)),
+                  ),
+                ],
               ),
             ],
           ),

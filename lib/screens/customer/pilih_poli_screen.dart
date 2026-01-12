@@ -20,7 +20,10 @@ class PilihPoliScreen extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
-            if (showHeader) _buildHeader(context),
+            if (showHeader)
+              _buildHeader(context)
+            else if (MediaQuery.of(context).size.width < 768)
+              _buildMobileHeader(context),
             Expanded(
               child: Stack(
                 children: [
@@ -104,6 +107,31 @@ class PilihPoliScreen extends StatelessWidget {
             ),
           ),
           const SizedBox(width: 40), // Balance the back button
+        ],
+      ),
+    );
+  }
+
+  Widget _buildMobileHeader(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
+      child: Row(
+        children: [
+          IconButton(
+            icon: const Icon(Icons.menu, color: _primaryColor),
+            onPressed: () => Scaffold.of(context).openDrawer(),
+          ),
+          const SizedBox(width: 8),
+          const Expanded(
+            child: Text(
+              'Reservasi Dokter',
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: _primaryColor,
+              ),
+            ),
+          ),
         ],
       ),
     );
